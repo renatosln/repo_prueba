@@ -1,7 +1,248 @@
-
-body{
-    background-color: black;
-    color: white;
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 
+/*Tabajando con divs de hijos*/
+.padre{
+    display: flex;
+    gap: 1rem; /*Usamos un margin inteligente entre hijos, para evitar darle margin a cada elemento*/
+
+    justify-content: space-between;
+    /*
+    si uso ----space between---- el el padre los hijos se separan todo lo posible, si pongo ----space around---- tengo espaciados al inicio al final y entre los elementos, si pongo ----space evenly---- hay un mismo espacio en todos lados al inicio, final y entre los elementos o ----center----, que coloca los elementos en el centro 
+    */
+
+    
+
+    border: 2px dashed violet;
+    /*Agregamos un borde al padre, y luego*/
+    height: 300px; /*Agregamos un tamaño específico a toda la caja, luego en cada hijo hacemos un width con un porcentaje para cada caso.*/
+}
+
+.hijo:nth-child(1){
+    /* :nth-child("numero") es para hacer referencia a cada hijo que hay dentro de un padre.*/
+    background-color: red;
+    /*
+    height: 200px;
+    width: 200px;
+    podemos darle height y width a cada hijo o simplemente en padre hacer lo siguiente:
+
+
+    /* podemos usar esto en cada hijo o ponerle al padre display flex;
+    display: inline-block; /*Para darle funcionalidad no de bloque a los elementos*/
+    /*
+    margin-right: 1rem;
+    */
+    width: 20%;
+    height: 100%;
+
+}
+
+.hijo:nth-child(2){
+    background-color: green;
+    width: 20%;
+    height: 100%;
+}
+
+.hijo:nth-child(3){
+    background-color: blue;
+    width: 20%;
+    height: 100%;
+}
+/*Tabajando con divs de hijos*/
+
+
+
+
+
+
+/*Tabajando con ps de hijos*/
+
+.padre1{
+    display: flex;
+    gap: 1rem; 
+    justify-content: center;
+    /*Podemos jugar con justify content ahora que la orientación es uno debajo de otro, y con esto jugar con align-items para acomodarlo a lo largo de la caja, esto funciona con los hijos de padre1*/
+    flex-direction: row;/* con colum Hacemos que la orientación sea horizontal, o vaya un elemento debajo de otro, con row uno ala derecha de otro.*/
+    align-items: center;/*Alineamos o movemos horizontalmente al centro o al eje al que sea perpendicular, si usamos ----flex-end---- lo lleva a la derecha del todo en este caso, ----flex-start---- lo pone al inicio*/
+    /*Observamos que los hijos de padre1, tienen todos 25% de tamaño sin embargo son 5, esto hace que exceda el tamaño de todos, pero ahora podemos agregar un:*/
+
+    /*Cuando hay un rompimiento, es decir que dentro de la caja los elementos se han acomodado (gracias al wrap) unos encima y otros debajo de acuero a su tamaño, aparece un comando para poder modificar estos elementos, es decir su espaciado entre sí, esto se llama aling-content*/
+    align-content: center;/*Solo sirve cuando tenemos un flex-wrap y exista un rompimiento*/
+
+    flex-wrap: wrap;/*que hace que cada elemento tenga el tamaño correspondiente dentro de la caja, y acomoda a los demás debajo de esta.*/
+
+    border: 2px dashed violet;
+    height: 300px; 
+}
+
+/*Antes del calc(), notamos que se alinean 3 elementos en la parte de arriba y 2 abajo, esto tiene que ver con el gap: 1rem; que pusimos, básicamente si hacemos un calc(25% - 1rem); no olvidar los espacios, pues este rem se restaría del tamaño de los elementos haciendo que entre en la primera fila, sin embargo el gap aún seguiría, esto se haría si se desea conservar el gap, es decir el espaciado entre elementos*/
+
+.hijo1:nth-child(1){
+    background-color: red;
+    width: calc(25% - 1rem);
+
+}
+
+.hijo1:nth-child(2){
+    background-color: green;
+    width: calc(25% - 1rem);
+}
+
+.hijo1:nth-child(3){
+    background-color: blue;
+    width: calc(25% - 1rem);
+}
+
+.hijo1:nth-child(4){
+    background-color: purple;
+    width: calc(25% - 1rem);
+}
+
+.hijo1:nth-child(5){
+    background-color: rgb(208, 255, 0);
+    width: calc(25% - 1rem);
+}
+
+.hijo1:nth-child(6){
+    background-color: rgb(0, 153, 255);
+    width: calc(25% - 1rem);
+}
+
+.hijo1:nth-child(7){
+    background-color: rgb(136, 0, 255);
+    width: calc(25% - 1rem);
+}
+
+
+.padre2{
+    display: flex;
+    height: 300px;
+    border: 2px dashed black;
+    padding: 1rem;
+
+    justify-content: space-around;
+    align-items: center;
+}
+
+.hijo2:nth-child(1){
+    background-color: red;
+    width: calc(25% - 1rem);
+    /*Hay comandos para cada hijo por ejemplo para linearlo en algun lado en específico usamos:*/
+    align-self: flex-start;
+}
+
+.hijo2:nth-child(2){
+    background-color: green;
+    width: calc(25% - 1rem);
+}
+
+.hijo2:nth-child(3){
+    background-color: blue;
+    width: calc(25% - 1rem);
+    align-self: flex-end;
+}
+
+
+.padre3{
+    display: flex;
+    height: 300px;
+    border: 2px solid black;
+}
+
+.hijo3:nth-child(1){
+    background-color: red;
+    flex-grow: 1;/*El factor de crecimiento, qué tanto crece el elemento. Es otra propiedad para los hijos.*/
+}
+
+.hijo3:nth-child(2){
+    background-color: green;
+    flex-grow: 2;
+}
+
+.hijo3:nth-child(3){
+    background-color: blue;
+    flex-grow: 1;
+}
+
+
+.padre4{
+    display: flex;
+    height: 300px;
+    border: 2px solid black;
+    flex-direction: row;
+    padding: 1rem;
+}
+
+.hijo4:nth-child(1){
+    background-color: red;
+    flex-shrink: 1;
+    /*flex-shrink, da una propiedad de decrecimiento de un cierto valor, 1, 2, etc, pero necesitamos un flex direction: row*/
+}
+
+.hijo4:nth-child(2){
+    background-color: green;
+    flex-shrink: 2;
+}
+
+.hijo4:nth-child(3){
+    background-color: blue;
+    flex-shrink: 3;
+}
+
+
+
+.padre5{
+    display: flex;
+    height: 300px;
+    border: 2px solid black;
+    flex-direction: row;
+    padding: 1rem;
+}
+
+.hijo5:nth-child(1){
+    background-color: red;
+    flex-basis: 20%;
+    /*flex-basis nos da una medidad base, por ejemplo del 20% en este caso. Crecerá tanto como pueda. Los elementos no salen de ahí.*/
+}
+
+.hijo5:nth-child(2){
+    background-color: green;
+    flex-basis: 3000px;
+}
+
+.hijo5:nth-child(3){
+    background-color: blue;
+    flex-basis: 100px;
+}
+
+
+
+
+.padre6{
+    display: flex;
+    height: 300px;
+
+    border: 2px solid black;
+    flex-direction: row; /*row-reverse*/
+    padding: 1rem;
+
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hijo6:nth-child(1){
+    order: 2;/*Order sirve para dar un orden */
+}
+
+.hijo6:nth-child(2){
+    order: 3;/*Order sirve para dar un orden */
+}
+
+.hijo6:nth-child(3){
+    order: 1;/*Order sirve para dar un orden específico a un elemento. Si deseamos por ejemplo dar el orden inverso, en la clase padre usaríamos en flex-direction: row-reverse */
+}
